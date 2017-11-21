@@ -550,6 +550,14 @@ public class PodTemplate extends AbstractDescribableImpl<PodTemplate> implements
         }
     }
 
+    @DataBoundSetter
+    // TODO is there a better way to pass in containers in declarative??
+    public void setContainerTemplate(@Nonnull ContainerTemplate containerTemplate) {
+        synchronized (this.containers) {
+            this.containers.add(new ContainerTemplate(containerTemplate));
+        }
+    }
+
     @Nonnull
     public List<ContainerTemplate> getContainers() {
         if (containers == null) {
