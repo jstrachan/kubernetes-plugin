@@ -266,6 +266,27 @@ Declarative Pipeline support requires Jenkins 2.66+
 
 Example at [examples/declarative.groovy](examples/declarative.groovy)
 
+### Referring to an existing PodTemplate 
+
+You can use the `label` property on the `agent` to reference a named `PodTemplate` in your Jenkins configuration with declarative pipeline as follows:
+
+```groovy
+pipeline {
+  agent {
+    label "maven"
+  }
+  stages {
+    stage('Run maven') {
+      steps {
+        container('maven') {
+          sh 'mvn -version'
+        }
+      }
+    }
+  }
+}
+```
+
 ## Accessing container logs from the pipeline
 
 If you use the `containerTemplate` to run some service in the background
